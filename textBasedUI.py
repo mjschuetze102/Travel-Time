@@ -5,14 +5,16 @@ User Interface for input and output values
 
 from calculateTravelTime import *
 
+
 """
 Creates the string that is displayed when asking for a desired distance
 """
 def getDistance():
     print("===================================")
-    distance= int(input("Enter desired distance (mi): "))
+    distance= float(input("Enter desired distance (mi): "))
 
     return distance
+
 
 def displayTable(travelTimes):
     print("===================================")
@@ -21,6 +23,7 @@ def displayTable(travelTimes):
         time= "{!s} Hours:Minutes".format(str(speedTime[1]))
         print("|{:^10}|{:^22}|".format(speed, time))
     print("===================================")
+
 
 def main():
     distance= getDistance()

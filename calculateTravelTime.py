@@ -16,7 +16,7 @@ def calculateTime(distance):
     mph= 20
     while(mph <= 90):
         # Solve for the amount of hours and minutes it will take to travel the distance
-        timeHour= distance // mph
+        timeHour= int(distance // mph)
         timeMin= int(((distance / mph) - timeHour) * 60)
 
         # If the minute value is less than 10, put a 0 in front to make it line up
