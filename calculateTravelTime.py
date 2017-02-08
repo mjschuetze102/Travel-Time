@@ -31,7 +31,7 @@ def calculateTime(distance):
         speedTime= (mph, timeTot)
         travelTimes.append(speedTime)
 
-        # Increment the speed by 5 mph
+        # Increment the speed
         mph+= 5
 
     return travelTimes
