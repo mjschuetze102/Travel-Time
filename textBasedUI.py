@@ -1,5 +1,5 @@
 """
-User Interface for input and output values
+Text Based User Interface for input and output values
 @author Michael Schuetze
 """
 
@@ -19,7 +19,7 @@ def getDistance():
 
 """
 Creates the string that is displayed after calculating speed/time combinations
-@param travelTimes- tuple containing speeds and times associated with those speeds
+@param travelTimes:tuple(int, str)- list of tuples containing speeds and times associated with those speeds
 """
 def displayTable(travelTimes):
     print("===================================")
