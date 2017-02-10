@@ -12,7 +12,7 @@ Creates the string that is displayed when asking for a desired distance
 """
 def getDistance():
     print("===================================")
-    distance= float(input("Enter desired distance (mi): "))
+    distance= input("Enter desired distance (mi): ")
 
     return distance
 

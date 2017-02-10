@@ -5,12 +5,15 @@ Collects data for the length of the trip and computes travel times at different 
 
 """
 Computes the amount of time it would take to travel the distance at various speeds
-@param distance- the distance (mi) being traveled
+@param distance- String the distance (mi) being traveled
 @return a list of tuples carrying various speeds and times to complete the given distance
 """
 def calculateTime(distance):
     # List that will hold the tuple (speed, time)
     travelTimes= []
+
+    # Convert distance to float
+    distance= float(distance)
 
     # Loop through the speeds from 20 mph to 90 mph
     mph= 20
