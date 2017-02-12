@@ -24,55 +24,55 @@ class createWindow(Gtk.Window):
         self.set_size_request(200, 100)
 
         # Grid Layout
-        grid = Gtk.Grid()
-        grid.set_row_spacing(5)
-        self.add(grid)
+        self.grid = Gtk.Grid()
+        self.grid.set_row_spacing(5)
+        self.add(self.grid)
 
 
         ### Top of the Grid ###
 
         # Box to hold user input label and field
-        userInput = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=10)
-        grid.attach(userInput, 0, 0, 2, 1)
+        self.userInput = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=10)
+        self.grid.attach(self.userInput, 0, 0, 2, 1)
 
         # Label for user input
-        distanceLabel = Gtk.Label()
-        distanceLabel.set_label("Please Enter a Distance (mi):")
-        userInput.pack_start(distanceLabel, True, True, 0)
+        self.distanceLabel = Gtk.Label()
+        self.distanceLabel.set_label("Please Enter a Distance (mi):")
+        self.userInput.pack_start(self.distanceLabel, True, True, 0)
 
         # Entry for user input
-        distanceInput = Gtk.Entry()
-        userInput.pack_start(distanceInput, True, True, 0)
+        self.distanceInput = Gtk.Entry()
+        self.userInput.pack_start(self.distanceInput, True, True, 0)
 
 
         # Button for calculating data
-        calculateButton = Gtk.Button(label="Calculate")
-        calculateButton.connect("clicked", self.calculateButtonClicked)
-        grid.attach(calculateButton, 0, 1, 2, 1)
+        self.calculateButton = Gtk.Button(label="Calculate")
+        self.calculateButton.connect("clicked", self.calculateButtonClicked)
+        self.grid.attach(self.calculateButton, 0, 1, 2, 1)
 
 
         ### Bottom of the Grid ###
 
         # Data to be placed in the travelTimeChart
-        speedTime_list_store = Gtk.ListStore(int, str)
+        self.speedTime_list_store = Gtk.ListStore(int, str)
         # Chart to display speeds and travel times
-        travelTimeChart = Gtk.TreeView(speedTime_list_store)
+        self.travelTimeChart = Gtk.TreeView(self.speedTime_list_store)
 
         # Add columns to the chart
         for i, colTitle in enumerate(["Speed", "Travel Time"]):
             renderer = Gtk.CellRendererText()
             column = Gtk.TreeViewColumn(colTitle, renderer, text=i)
 
-            travelTimeChart.append_column(column)
+            self.travelTimeChart.append_column(column)
 
-        grid.attach(travelTimeChart, 0, 2, 2, 1)
+        self.grid.attach(self.travelTimeChart, 0, 2, 2, 1)
 
 
     """
     Collects the user input and sends it to be converted into speeds and times
     """
     def calculateButtonClicked(self, widget):
-        travelTimes = calculateTime(self.distanceInput.get_text())
+        travelTimes = runCalculations(self.distanceInput.get_text())
         self.changeTravelTimes(travelTimes)
 
 
