@@ -10,7 +10,7 @@ Runs the calculations required to display the chart on the user interface
 @param price:String - the price of gas
 @return a list of tuples carrying various speeds, times, and costs to complete the given distance
 """
-def runCalculations(distance, price=2.19):
+def runCalculations(distance, price=1):
     # Convert distance and price to float
     distance = float(distance)
     price = float(price)
@@ -33,8 +33,14 @@ def runCalculations(distance, price=2.19):
         # Calculate the money wasted by traveling at a less fuel efficient speed
         moneyLost = str(calculateMoneyLost(distance, price, fuelEff))
 
+        if tripCost[-3] != ".":
+            tripCost = tripCost + "0"
+
+        if moneyLost[-3] != ".":
+            moneyLost = moneyLost + "0"
+
         # Create and append the tuple (speed, time, tripCost, moneyLost) to the list
-        speedTimeCostLoss = (mph, timeTot, tripCost.format("%.2f"), moneyLost.format("%.2f"))
+        speedTimeCostLoss = (mph, timeTot, tripCost, moneyLost)
         travelData.append(speedTimeCostLoss)
 
         # Increment the speed
