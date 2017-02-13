@@ -54,12 +54,12 @@ class createWindow(Gtk.Window):
         ### Bottom of the Grid ###
 
         # Data to be placed in the travelTimeChart
-        self.speedTime_list_store = Gtk.ListStore(int, str)
+        self.speedTimeCostLoss_list_store = Gtk.ListStore(int, str, float, float)
         # Chart to display speeds and travel times
-        self.travelTimeChart = Gtk.TreeView(self.speedTime_list_store)
+        self.travelTimeChart = Gtk.TreeView(self.speedTimeCostLoss_list_store)
 
         # Add columns to the chart
-        for i, colTitle in enumerate(["Speed", "Travel Time"]):
+        for i, colTitle in enumerate(["Speed", "Travel Time", "Cost of Trip", "Money Lost"]):
             renderer = Gtk.CellRendererText()
             column = Gtk.TreeViewColumn(colTitle, renderer, text=i)
 
@@ -69,24 +69,24 @@ class createWindow(Gtk.Window):
 
 
     """
-    Collects the user input and sends it to be converted into speeds and times
+    Collects the user input and sends it to be converted into speeds, times, and costs
     """
     def calculateButtonClicked(self, widget):
-        travelTimes = runCalculations(self.distanceInput.get_text())
-        self.changeTravelTimes(travelTimes)
+        travelData = runCalculations(self.distanceInput.get_text())
+        self.changeTravelData(travelData)
 
 
     """
     Changes the chart on the GUI to the appropriate data
-    @param travelTimes:tuple(int, str)- list of tuples containing speeds and times associated with those speeds
+    @param travelData:tuple(int, str, float, float)- list of tuples containing speeds and times/costs associated with those speeds
     """
-    def changeTravelTimes(self, travelTimes):
+    def changeTravelData(self, travelData):
         # Remove all the data from the previous list
-        self.speedTime_list_store.clear()
+        self.speedTimeCostLoss_list_store.clear()
 
         # Add in the new data so that it may be displayed
-        for speedTime in travelTimes:
-            self.speedTime_list_store.append(list(speedTime))
+        for speedTimeCostLoss in travelData:
+            self.speedTimeCostLoss_list_store.append(list(speedTimeCostLoss))
 
 
 """
