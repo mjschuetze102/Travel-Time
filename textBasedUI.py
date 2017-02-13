@@ -7,14 +7,15 @@ from calculateTravelTime import *
 
 
 """
-Creates the string that is displayed when asking for a desired distance
-@return float representing the distance to be traveled
+Creates the string that is displayed when asking for a desired distance and price of gas
+@return float representing the distance to be traveled, float representing the price of gas
 """
-def getDistance():
+def getUserInput():
     print("=====================================================")
     distance = input("Enter desired distance (mi): ")
+    price = input("Enter price for gas ($): ")
 
-    return distance
+    return distance, price
 
 
 """
@@ -39,8 +40,8 @@ Main function for the program
 Calls functions to collect user input, make calculations, and display them for the user
 """
 def main():
-    distance = getDistance()
-    travelTimes = runCalculations(distance)
+    distance, price = getUserInput()
+    travelTimes = runCalculations(distance, price)
     displayTable(travelTimes)
 
 if __name__ == '__main__':

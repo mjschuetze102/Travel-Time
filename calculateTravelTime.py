@@ -10,7 +10,21 @@ Runs the calculations required to display the chart on the user interface
 @param price:String - the price of gas
 @return a list of tuples carrying various speeds, times, and costs to complete the given distance
 """
-def runCalculations(distance, price=1):
+def runCalculations(distance, price):
+    # Check for valid input of distance
+    # If invalid return no object
+    try:
+        float(distance)
+    except ValueError:
+        return []
+
+    # Check for valid input of price
+    # If invalid set the price to 0
+    try:
+        float(price)
+    except ValueError:
+        price = 0
+
     # Convert distance and price to float
     distance = float(distance)
     price = float(price)
