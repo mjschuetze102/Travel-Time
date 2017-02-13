@@ -38,7 +38,7 @@ Calls functions to collect user input, make calculations, and display them for t
 """
 def main():
     distance= getDistance()
-    travelTimes= calculateTime(distance)
+    travelTimes= runCalculations(distance)
     displayTable(travelTimes)
 
 if __name__ == '__main__':
