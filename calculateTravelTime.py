@@ -10,7 +10,7 @@ Runs the calculations required to display the chart on the user interface
 @param price:String - the price of gas
 @return a list of tuples carrying various speeds, times, and costs to complete the given distance
 """
-def runCalculations(distance, price=0):
+def runCalculations(distance, price=2.19):
     # Convert distance and price to float
     distance = float(distance)
     price = float(price)
@@ -28,14 +28,14 @@ def runCalculations(distance, price=0):
         fuelEff = calculateFuelEfficiency(mph)
 
         # Calculate the cost of the trip for an average car based on the given gas price
-        tripCost = calculateCostOfTrip(distance, price, fuelEff)
+        tripCost = str(calculateCostOfTrip(distance, price, fuelEff))
 
         # Calculate the money wasted by traveling at a less fuel efficient speed
-        moneyLost = calculateMoneyLost(distance, price, fuelEff)
+        moneyLost = str(calculateMoneyLost(distance, price, fuelEff))
 
         # Create and append the tuple (speed, time, tripCost, moneyLost) to the list
-        speedTime = (mph, timeTot, tripCost, moneyLost)
-        travelData.append(speedTime)
+        speedTimeCostLoss = (mph, timeTot, tripCost.format("%.2f"), moneyLost.format("%.2f"))
+        travelData.append(speedTimeCostLoss)
 
         # Increment the speed
         mph += 5
@@ -69,10 +69,14 @@ Computes the fuel efficiency of the car
 @param speed:int - the speed at which the car is traveling
 @return float representing the miles per gallon the average vehicle gets at a given speed
 
+Most efficient speed to travel at is between 50 and 55 mpg
 Equation created from this graph: http://www.mpgforspeed.com/fegov_graph.gif
 """
 def calculateFuelEfficiency(speed):
-    return -0.0000016225 * pow(speed, 4) + 0.00036121 * pow(speed, 3) - 0.036312 * pow(speed, 2) + 1.6445 * speed + 3.7416
+    # Shift the graph over so the high point is at 50 mpg
+    speed= speed - 3.683
+    return -0.000000001066 * pow(speed, 6) + 0.0000003738 * pow(speed, 5) - 0.000050025 * pow(speed, 4) + \
+           0.0032957 * pow(speed, 3) - 0.12182 * pow(speed, 2) + 2.719 * speed - 0.22814
 
 
 """
@@ -83,7 +87,7 @@ Computes the amount of money it would cost to buy gas for the trip
 @return the time to complete the given distance
 """
 def calculateCostOfTrip(distance, price, fuelEff):
-    return distance / fuelEff * price
+    return float( int((distance / fuelEff * price) * 100) / 100)
 
 
 """
@@ -94,4 +98,4 @@ Computes the amount of gas being wasted in dollars
 @return float representing the amount of money lost by traveling at a less effective speed
 """
 def calculateMoneyLost(distance, price, fuelEff):
-    return (distance / fuelEff * price) - (distance / calculateFuelEfficiency(50) * price)
+    return float( int(((distance / fuelEff * price) - (distance / calculateFuelEfficiency(50) * price)) * 100) / 100)

@@ -54,7 +54,7 @@ class createWindow(Gtk.Window):
         ### Bottom of the Grid ###
 
         # Data to be placed in the travelTimeChart
-        self.speedTimeCostLoss_list_store = Gtk.ListStore(int, str, float, float)
+        self.speedTimeCostLoss_list_store = Gtk.ListStore(str, str, str, str)
         # Chart to display speeds and travel times
         self.travelTimeChart = Gtk.TreeView(self.speedTimeCostLoss_list_store)
 
